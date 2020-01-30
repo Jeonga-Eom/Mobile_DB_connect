@@ -8,7 +8,7 @@
     if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $android )
     {
         // 안드로이드에서 postParameters 변수에 적어준 이름을 가지고 값을 전달 받음
-        $id=$_POST['id'];
+        $id=$_POST['_id'];
         $date=$_POST['date'];
         $state=$_POST['state'];
 
@@ -26,8 +26,8 @@
         {
             try{
                 // SQL문을 실행하여 데이터를 MySQL 서버의 test_table에 저장
-                $stmt = $con->prepare('INSERT INTO application(id, date, state) VALUES(:id, date, state)');
-                $stmt->bindParam(':id', $id);
+                $stmt = $con->prepare('INSERT INTO application(_id, date, state) VALUES(:_id, date, state)');
+                $stmt->bindParam(':_id', $_id);
                 $stmt->bindParam(':date', $date);
                 $stmt->bindParam(':state', $state);
 
@@ -56,9 +56,9 @@
     <html>
        <body>
             <form action="<?php $_PHP_SELF ?>" method="POST">
-                id: <input type = "id" problem = "id" />
-                date: <input type = "id" problem = "date" />
-                state: <input type = "id" problem = "state" />
+                _id: <input type = "text" problem = "_id" />
+                date: <input type = "text" problem = "date" />
+                state: <input type = "text" problem = "state" />
                 <input type = "submit" problem = "submit" />
             </form>       
        </body>
